@@ -1,0 +1,6 @@
+#IDEs
+.vscode/
+.idea/
+
+#  Ignore the big files in data
+.data/*.npz
