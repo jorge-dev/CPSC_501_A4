@@ -19,6 +19,8 @@ def sigmoid(z):
     return 1.0/(1.0 + np.exp(-z))
 
 # applies the derivative of the sigmoid function to each entry in the given array
+
+
 def sigmoid_prime(z):
     return sigmoid(z)*(1 - sigmoid(z))
 
@@ -50,7 +52,7 @@ def loadFromFile(filename):
 
 class Network(object):
 
-    def __init__(self, sizes, biases = None, weights = None):
+    def __init__(self, sizes, biases=None, weights=None):
         """The list ``sizes`` contains the number of neurons in the
         respective layers of the network.  For example, if the list
         was [2, 3, 1] then it would be a three-layer network, with the
@@ -65,15 +67,15 @@ class Network(object):
         self.sizes = sizes
         self.biases = biases
         self.weights = weights
-        
+
         if (biases == None):
             # initialize randomly from a normal distribution
             self.biases = [np.random.randn(y, 1) for y in sizes[1:]]
-            
+
         if (weights == None):
             # initialize randomly from a normal distribution
-            self.weights = [np.random.randn(y, x) for x, y in zip(sizes[:-1], sizes[1:])]
-        
+            self.weights = [np.random.randn(y, x)
+                            for x, y in zip(sizes[:-1], sizes[1:])]
 
     def feedforward(self, a):
         """Return the output of the network if ``a`` is input."""
@@ -99,7 +101,8 @@ class Network(object):
             test_data = list(test_data)
             n_test = len(test_data)
             print(f"Length of test data: {n_test}")
-            print("Initial performance : {} / {}".format(self.evaluate(test_data),n_test))
+            print(
+                "Initial performance : {} / {}".format(self.evaluate(test_data), n_test))
 
         for j in range(epochs):
             random.shuffle(training_data)
@@ -109,7 +112,8 @@ class Network(object):
             for mini_batch in mini_batches:
                 self.update_mini_batch(mini_batch, eta)
             if test_data:
-                print("Epoch {} : {} / {}".format(j,self.evaluate(test_data),n_test))
+                print("Epoch {} : {} / {}".format(j,
+                      self.evaluate(test_data), n_test))
             else:
                 print("Epoch {} complete".format(j))
 
@@ -138,8 +142,8 @@ class Network(object):
         nabla_w = [np.zeros(w.shape) for w in self.weights]
         # feedforward
         activation = x
-        activations = [x] # list to store all the activations, layer by layer
-        zs = [] # list to store all the z vectors, layer by layer
+        activations = [x]  # list to store all the activations, layer by layer
+        zs = []  # list to store all the z vectors, layer by layer
         for b, w in zip(self.biases, self.weights):
             z = np.dot(w, activation)+b
             zs.append(z)
@@ -169,12 +173,11 @@ class Network(object):
         network outputs the correct result. Note that the neural
         network's output is assumed to be the index of whichever
         neuron in the final layer has the highest activation."""
-        test_results = [(np.argmax(self.feedforward(x)), y) for (x, y) in test_data]
+        test_results = [(np.argmax(self.feedforward(x)), y)
+                        for (x, y) in test_data]
         return sum(int(x == y) for (x, y) in test_results)
 
     def cost_derivative(self, output_activations, y):
         """Return the vector of partial derivatives \partial C_x /
         \partial a for the output activations."""
         return (output_activations-y)
-
- 
