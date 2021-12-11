@@ -102,7 +102,7 @@ class Network(object):
             n_test = len(test_data)
             print(f"Length of test data: {n_test}")
             print(
-                "Initial performance : {} / {}".format(self.evaluate(test_data), n_test))
+                "Initial performance : {} / {} -- {:.2f}%".format(self.evaluate(test_data), n_test, (self.evaluate(test_data)/n_test)*100))
 
         for j in range(epochs):
             random.shuffle(training_data)
@@ -112,10 +112,12 @@ class Network(object):
             for mini_batch in mini_batches:
                 self.update_mini_batch(mini_batch, eta)
             if test_data:
-                print("Epoch {} : {} / {}".format(j,
-                      self.evaluate(test_data), n_test))
+                print("Epoch {} : {} / {} -- {:.2f}%".format(j,
+                      self.evaluate(test_data), n_test, (self.evaluate(test_data) / n_test)*100))
             else:
                 print("Epoch {} complete".format(j))
+        print("\nTraining completed with a final performance of {:.2f}%".format(
+            (self.evaluate(test_data)/n_test)*100))
 
     def update_mini_batch(self, mini_batch, eta):
         """Update the network's weights and biases by applying
