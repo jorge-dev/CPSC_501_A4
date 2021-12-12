@@ -1,0 +1,31 @@
+./.venv/bin/python3 heart_starter.py
+╔═════════════════════════════════════════════════════════╗
+║        Hyperparameters                                  ║
+║        ---------------                                  ║
+║        Epochs: 10                                       ║
+║        Mini-batch size: 10                              ║
+║        Step Size: 0.1                                   ║
+║        Number of Layers: 3                              ║
+║        Number of Hidden Neurons: 1                      ║
+║        Number of Neurons in each Layer: 9 ,10 ,2        ║
+╚═════════════════════════════════════════════════════════╝
+Number of data points: 462
+Number of training samples: 385
+Number of testing samples: 77
+Initializing new net
+Length of training data: 385
+Length of test data: 77
+Initial performance : 45 / 77 -- 58.44%
+Epoch 0 : 46 / 77 -- 59.74%
+Epoch 1 : 51 / 77 -- 66.23%
+Epoch 2 : 51 / 77 -- 66.23%
+Epoch 3 : 52 / 77 -- 67.53%
+Epoch 4 : 52 / 77 -- 67.53%
+Epoch 5 : 52 / 77 -- 67.53%
+Epoch 6 : 53 / 77 -- 68.83%
+Epoch 7 : 53 / 77 -- 68.83%
+Epoch 8 : 53 / 77 -- 68.83%
+Epoch 9 : 53 / 77 -- 68.83%
+
+Training completed with a final performance of 68.83%
+Total time taken: 0 min 0.15 sec
