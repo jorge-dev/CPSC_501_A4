@@ -96,7 +96,7 @@ def print_msg_box(msg, indent=1, width=None, title=None):
 
 
 input_neurons = 784
-hidden_neurons = []
+hidden_neurons = [10]
 output_neurons = 10
 sizes = [input_neurons] + hidden_neurons + [output_neurons]
 
@@ -119,7 +119,6 @@ net = loadNet(sizes)
 
 start = dt.now()
 net.SGD(trainingData, epochs, mini_batch_size, eta, test_data=testingData)
-sleep(1)
 end = dt.now()
 total_time = end - start
 total_time_min, total_time_sec = divmod(total_time.total_seconds(), 60)
