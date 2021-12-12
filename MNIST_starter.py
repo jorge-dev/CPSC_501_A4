@@ -149,7 +149,7 @@ sizes = [input_neurons] + hidden_neurons + [output_neurons]
 
 epochs = 10
 mini_batch_size = 10
-eta = .1
+eta = 1
 
 message = f"""Epochs: {epochs} 
 Mini-batch size: {mini_batch_size}
