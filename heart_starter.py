@@ -1,80 +1,10 @@
 import csv
 import sys
 from datetime import datetime as dt
-
+from pprint import pprint
 import numpy as np
 
 import network
-
-'''
-HELPFUL FACTS:	min		max		average		std.dev
-sbp				101		218		138.3		20.5
-tobacco			0		31.2	3.64		4.59
-ldl				.98		15.33	4.74		2.07
-adiposity		6.74	42.49	25.4		7.77
-famhist			binary value (1 = Present, 0 = Absent)
-typea			13		78		53.1		9.81
-obesity			14.7	46.58	26.0		4.21
-alcohol			0		147.19	17.0		24.5
-age				15		64		42.8		14.6
-'''
-
-sbp = {
-    'min': 101,
-    'max': 218,
-    'mean': 138.3,
-    'std': 20.5
-}
-
-tabacco = {
-    'min': 0,
-    'max': 31.2,
-    'mean': 3.64,
-    'std': 4.59
-}
-
-ldl = {
-    'min': .98,
-    'max': 15.33,
-    'mean': 4.74,
-    'std': 2.07
-}
-
-adiposity = {
-    'min': 6.74,
-    'max': 42.49,
-    'mean': 25.4,
-    'std': 7.77
-}
-
-typea = {
-    'min': 13,
-    'max': 78,
-    'mean': 53.1,
-    'std': 9.81
-
-}
-
-obesity = {
-    'min': 14.7,
-    'max': 46.58,
-    'mean': 26.0,
-    'std': 4.21
-}
-
-alcohol = {
-    'min': 0,
-    'max': 147.19,
-    'mean': 17.0,
-    'std': 24.5
-}
-
-age = {
-    'min': 15,
-    'max': 64,
-    'mean': 42.8,
-    'std': 14.6
-}
 
 
 # converts a 1d python list into a (1,n) row vector
@@ -101,6 +31,8 @@ def onehot(i, size):
 def standardize(x, mu, sigma):
     return ((x - mu)/sigma)
 
+# rescales a value to a new between 0 and 1
+
 
 def rescale(x, min, max):
     return (x - min)/(max - min)
@@ -108,11 +40,25 @@ def rescale(x, min, max):
 ##############################################
 
 
-def getDataFromSample(sample):
-    rowName = cv(int(sample[0]))
+''' Encode and standardize the data gathered from the heart.csv file
+    returns a tuple (trainingData, testingData),
+    each of which is a zipped array of features and labels
+ '''
+
+
+def getDataFromSample(sample, dataStat):
+    sbp = dataStat['sbp']
+    tobacco = dataStat['tobacco']
+    ldl = dataStat['ldl']
+    adiposity = dataStat['adiposity']
+    typea = dataStat['typea']
+    obesity = dataStat['obesity']
+    alcohol = dataStat['alcohol']
+    age = dataStat['age']
+
     sbp_std = cv([standardize(float(sample[1]), sbp['mean'], sbp['std'])])
     tobacco_std = cv([standardize(
-        float(sample[2]), tabacco['mean'], tabacco['std'])])
+        float(sample[2]), tobacco['mean'], tobacco['std'])])
     ldl_std = cv([standardize(float(sample[3]), ldl['mean'], ldl['std'])])
     adiposity_std = cv([standardize(
         float(sample[4]), adiposity['mean'], adiposity['std'])])
@@ -138,10 +84,111 @@ def getDataFromSample(sample):
     return (features, label)
 
 
+'''
+    Calculates the mean and standard deviation of each feature in the data
+'''
+
+
+def calculateDataStats(data: dict):
+    sbp = []
+    tobacco = []
+    ldl = []
+    adiposity = []
+    famhist = []
+    typea = []
+    obesity = []
+    alcohol = []
+    age = []
+
+    for row in data:
+        sbp.append(float(row.get('sbp')))
+        tobacco.append(float(row.get('tobacco')))
+        ldl.append(float(row.get('ldl')))
+        adiposity.append(float(row.get('adiposity')))
+        famhist.append(row.get('famhist'))
+        typea.append(float(row.get('typea')))
+        obesity.append(float(row.get('obesity')))
+        alcohol.append(float(row.get('alcohol')))
+        age.append(float(row.get('age')))
+
+    sbp_stats = {
+        'mean': np.mean(sbp),
+        'std': np.std(sbp),
+        'min': np.min(sbp),
+        'max': np.max(sbp)
+    }
+
+    tobacco_stats = {
+        'mean': np.mean(tobacco),
+        'std': np.std(tobacco),
+        'min': np.min(tobacco),
+        'max': np.max(tobacco)
+    }
+
+    ldl_stats = {
+        'mean': np.mean(ldl),
+        'std': np.std(ldl),
+        'min': np.min(ldl),
+        'max': np.max(ldl)
+    }
+
+    adiposity_stats = {
+        'mean': np.mean(adiposity),
+        'std': np.std(adiposity),
+        'min': np.min(adiposity),
+        'max': np.max(adiposity)
+    }
+
+    typea_stats = {
+        'mean': np.mean(typea),
+        'std': np.std(typea),
+        'min': np.min(typea),
+        'max': np.max(typea)
+    }
+
+    obesity_stats = {
+        'mean': np.mean(obesity),
+        'std': np.std(obesity),
+        'min': np.min(obesity),
+        'max': np.max(obesity)
+    }
+
+    alcohol_stats = {
+        'mean': np.mean(alcohol),
+        'std': np.std(alcohol),
+        'min': np.min(alcohol),
+        'max': np.max(alcohol)
+    }
+
+    age_stats = {
+        'mean': np.mean(age),
+        'std': np.std(age),
+        'min': np.min(age),
+        'max': np.max(age)
+    }
+
+    return {
+        'sbp': sbp_stats,
+        'tobacco': tobacco_stats,
+        'ldl': ldl_stats,
+        'adiposity': adiposity_stats,
+        'typea': typea_stats,
+        'obesity': obesity_stats,
+        'alcohol': alcohol_stats,
+        'age': age_stats}
+
+
 # reads number of data points, feature vectors and their labels from the given file
 # and returns them as a tuple
+
+
 def readData(filename):
     with open(filename, 'r') as csvfile:
+        data = csv.DictReader(csvfile)
+        dataStat = calculateDataStats(data)
+
+        # reset the file pointer to the beginning of the file
+        csvfile.seek(0)
         reader = csv.reader(csvfile)
         next(reader, None)
         n = 0
@@ -149,7 +196,7 @@ def readData(filename):
         labels = []
         for row in reader:
             n += 1
-            featureVec, label = getDataFromSample(row)
+            featureVec, label = getDataFromSample(row, dataStat)
             features.append(featureVec)
             labels.append(label)
 
@@ -170,9 +217,6 @@ def prepData():
     ntrain = int(n * 5/6)
     ntest = n - ntrain
 
-    # print(features[0])
-    # print(labels[0])
-
     # split into training and testing data
     trainingFeatures = features[:ntrain]
     # training labels should be in onehot form
@@ -186,6 +230,12 @@ def prepData():
     trainingData = zip(trainingFeatures, trainingLabels)
     testingData = zip(testingFeatures, testingLabels)
     return (trainingData, testingData)
+
+
+'''
+    Initializes a neural network with the given parameters if no arguments are given,
+    otherwise initializes a neural network with from the given file
+'''
 
 
 def loadNet(sizes, bias=None, weight=None):
@@ -202,6 +252,11 @@ def loadNet(sizes, bias=None, weight=None):
         net = network.Network(sizes, bias, weight)
 
     return net
+
+
+'''
+    Prints a message box in a standardized format and with a custom message
+'''
 
 
 def print_msg_box(msg, indent=1, width=None, title=None):
@@ -222,15 +277,14 @@ def print_msg_box(msg, indent=1, width=None, title=None):
 
 ###################################################################
 
-
 input_neurons = 9
-hidden_neurons = [10]
+hidden_neurons = [100]
 output_neurons = 2
 sizes = [input_neurons] + hidden_neurons + [output_neurons]
 
 epochs = 10
 mini_batch_size = 10
-eta = .1
+eta = 2
 
 message = f"""Epochs: {epochs} 
 Mini-batch size: {mini_batch_size}

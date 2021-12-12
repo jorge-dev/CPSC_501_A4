@@ -74,7 +74,7 @@ class Network(object):
 
         if (weights == None):
             # initialize randomly from a normal distribution
-            self.weights = [np.random.randn(y, x)
+            self.weights = [np.random.randn(y, x)/np.sqrt(x)
                             for x, y in zip(sizes[:-1], sizes[1:])]
 
     def feedforward(self, a):
