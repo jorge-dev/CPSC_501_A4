@@ -1,0 +1,30 @@
+.venv/bin/python3 MNIST_starter.py
+╔════════════════════════════════════════════════════════════╗
+║        Hyperparameters                                     ║
+║        ---------------                                     ║
+║        Epochs: 10                                          ║
+║        Mini-batch size: 10                                 ║
+║        Step Size: 2.5                                      ║
+║        Number of Layers: 3                                 ║
+║        Number of Hidden Neurons: 1                         ║
+║        Number of Neurons in each Layer: 784 ,50 ,10        ║
+╚════════════════════════════════════════════════════════════╝
+Training data:  60000  entries
+Testing data:  10000  entries
+Initializing new net
+Length of training data: 60000
+Length of test data: 10000
+Initial performance : 850 / 10000 -- 8.50%
+Epoch 0 : 8263 / 10000 -- 82.63%
+Epoch 1 : 8404 / 10000 -- 84.04%
+Epoch 2 : 9323 / 10000 -- 93.23%
+Epoch 3 : 9432 / 10000 -- 94.32%
+Epoch 4 : 9441 / 10000 -- 94.41%
+Epoch 5 : 9498 / 10000 -- 94.98%
+Epoch 6 : 9518 / 10000 -- 95.18%
+Epoch 7 : 9494 / 10000 -- 94.94%
+Epoch 8 : 9545 / 10000 -- 95.45%
+Epoch 9 : 9527 / 10000 -- 95.27%
+
+Training completed with a final performance of 95.27%
+Total time taken: 2 min 37.18 sec
