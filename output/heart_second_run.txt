@@ -1,0 +1,56 @@
+./.venv/bin/python3 heart_starter.py
+╔══════════════════════════════════════════════════════════╗
+║        Hyperparameters                                   ║
+║        ---------------                                   ║
+║        Epochs: 35                                        ║
+║        Mini-batch size: 10                               ║
+║        Step Size: 1                                      ║
+║        Number of Layers: 3                               ║
+║        Number of Hidden Neurons: 1                       ║
+║        Number of Neurons in each Layer: 9 ,100 ,2        ║
+╚══════════════════════════════════════════════════════════╝
+Number of data points: 462
+Number of training samples: 385
+Number of testing samples: 77
+Initializing new net
+Length of training data: 385
+Length of test data: 77
+Initial performance : 54 / 77 -- 70.13%
+Epoch 0 : 55 / 77 -- 71.43%
+Epoch 1 : 59 / 77 -- 76.62%
+Epoch 2 : 57 / 77 -- 74.03%
+Epoch 3 : 54 / 77 -- 70.13%
+Epoch 4 : 61 / 77 -- 79.22%
+Epoch 5 : 51 / 77 -- 66.23%
+Epoch 6 : 57 / 77 -- 74.03%
+Epoch 7 : 60 / 77 -- 77.92%
+Epoch 8 : 59 / 77 -- 76.62%
+Epoch 9 : 55 / 77 -- 71.43%
+Epoch 10 : 62 / 77 -- 80.52%
+Epoch 11 : 59 / 77 -- 76.62%
+Epoch 12 : 61 / 77 -- 79.22%
+Epoch 13 : 56 / 77 -- 72.73%
+Epoch 14 : 54 / 77 -- 70.13%
+Epoch 15 : 56 / 77 -- 72.73%
+Epoch 16 : 56 / 77 -- 72.73%
+Epoch 17 : 55 / 77 -- 71.43%
+Epoch 18 : 54 / 77 -- 70.13%
+Epoch 19 : 57 / 77 -- 74.03%
+Epoch 20 : 57 / 77 -- 74.03%
+Epoch 21 : 57 / 77 -- 74.03%
+Epoch 22 : 55 / 77 -- 71.43%
+Epoch 23 : 58 / 77 -- 75.32%
+Epoch 24 : 53 / 77 -- 68.83%
+Epoch 25 : 53 / 77 -- 68.83%
+Epoch 26 : 53 / 77 -- 68.83%
+Epoch 27 : 56 / 77 -- 72.73%
+Epoch 28 : 53 / 77 -- 68.83%
+Epoch 29 : 56 / 77 -- 72.73%
+Epoch 30 : 55 / 77 -- 71.43%
+Epoch 31 : 50 / 77 -- 64.94%
+Epoch 32 : 56 / 77 -- 72.73%
+Epoch 33 : 58 / 77 -- 75.32%
+Epoch 34 : 54 / 77 -- 70.13%
+
+Training completed with a final performance of 70.13%
+Total time taken: 0 min 0.65 sec
