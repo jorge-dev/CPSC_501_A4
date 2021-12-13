@@ -1,3 +1,4 @@
+from os import access
 import numpy as np
 import random
 import pickle
@@ -119,6 +120,15 @@ class Network(object):
         print("\nTraining completed with a final performance of {:.2f}%".format(
             (self.evaluate(test_data)/n_test)*100))
 
+    def printEvaluateNet(self, test_data):
+        """Prints the performance of the network on the given test data
+           Mostly useful to check the performance of a saved net"""
+        if test_data:
+            test_data = list(test_data)
+            n_test = len(test_data)
+            print(
+                "Net initial performance : {} / {} -- {:.2f}%".format(self.evaluate(test_data), n_test, (self.evaluate(test_data)/n_test)*100))
+
     def update_mini_batch(self, mini_batch, eta):
         """Update the network's weights and biases by applying
         gradient descent using backpropagation to a single mini batch.
@@ -152,8 +162,7 @@ class Network(object):
             activation = sigmoid(z)
             activations.append(activation)
         # backward pass
-        delta = self.cost_derivative(activations[-1], y) * \
-            sigmoid_prime(zs[-1])
+        delta = self.cost_derivative(activations[-1], y)
         nabla_b[-1] = delta
         nabla_w[-1] = np.dot(delta, activations[-2].transpose())
         # Note that the variable l in the loop below is used a little
