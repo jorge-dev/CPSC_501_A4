@@ -96,13 +96,13 @@ def print_msg_box(msg, indent=1, width=None, title=None):
 
 
 input_neurons = 784
-hidden_neurons = [25]
+hidden_neurons = [100]
 output_neurons = 10
 sizes = [input_neurons] + hidden_neurons + [output_neurons]
 
-epochs = 20
+epochs = 10
 mini_batch_size = 10
-eta = 2.5
+eta = .1
 
 message = f"""Epochs: {epochs} 
 Mini-batch size: {mini_batch_size}
