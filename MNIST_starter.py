@@ -143,13 +143,13 @@ def print_msg_box(msg, indent=1, width=None, title=None):
 
 
 input_neurons = 784
-hidden_neurons = [50]
+hidden_neurons = [100]
 output_neurons = 10
 sizes = [input_neurons] + hidden_neurons + [output_neurons]
 
-epochs = 10
+epochs = 60
 mini_batch_size = 10
-eta = 2.5
+eta = .1
 
 message = f"""Epochs: {epochs} 
 Mini-batch size: {mini_batch_size}
@@ -162,7 +162,6 @@ print_msg_box(message, 8, title="Hyperparameters")
 
 trainingData, testingData = prepData()
 net = loadNet(sizes)
-
 start = dt.now()
 net.SGD(trainingData, epochs, mini_batch_size, eta, test_data=testingData)
 end = dt.now()
